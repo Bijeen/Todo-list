@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TODO LIST</title>
+    <link rel="website icon" type="png"
+        href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRx6MFBaXnVyvVp7kgyKj20bvy5Q9sdNEEdTnypT2oZotW3IMGt8-4BuBg_q3kwqFtgsWc&usqp=CAU">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="head">
+        <div class="header-container">
+            <img height="100px"
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRx6MFBaXnVyvVp7kgyKj20bvy5Q9sdNEEdTnypT2oZotW3IMGt8-4BuBg_q3kwqFtgsWc&usqp=CAU"
+                alt="">
+
+            <h1 class="he">Todo List</h1>
+        </div>
+    </header>
+    <hr><br>
+
+
+    <main class="content1">
+        <div class="todo-input-grid">
+
+            <div class="st">
+                <input type="text" placeholder="Today work" class="js-name-input name-input">
+                <input type="date" class="js-due-date-input due-date-input">
+                <input type="time" class="js-due-time-input due-time-input">
+            </div>
+            <div class="nd">
+                <button class="add-todo-button js-add-todo-button">ADD</button>
+            </div>
+
+        </div>
+        <h2 class="or">cheque your work!</h2>
+        <div id="todoheader">
+            <div class="todo-name2">WORK</div>
+            <div class="todo-DATE">DATE</div>
+            <div class="todo-TIME">TIME</div>
+            <div class="todo-action">ACTION</div>
+        </div>
+        <div class="js-todo-list todo-grid"></div>
+    </main>
+    <footer>
+        <div id="foot">
+            <a href=""><img height="100px" width="100px" src="logo.jpg" alt=""></a></div>
+            <h3>--DEVELOPER DETAILS--</h3>
+            <div id="link">
+                <a href=""><img height="30px" width="30px" src="github.png" alt=""></a>
+                <a href="https://youtube.com/@artwithbijeen?si=H3nsRMaLoFVT03XO"><img height="30px" width="30px" src="youtube.png" alt=""></a>
+                <a href="https://www.linkedin.com/in/bijeen-nayan-shaw-858826374?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app "><img height="30px" width="30px" src="linkedin.png" alt=""></a>
+                <a href="bijeenshaw@gmail.com"><img height="30px" width="30px" src="email.png" alt=""></a>
+            
+        </div>
+    </footer>
+    <script>
+        /*const todoList = [{
+            name: 'make dinner',
+            dueDate: '2025-9-21'
+        }];*/
+        // let todoList=JSON.parse(localStorage.getItem('todoList'))|| [];
+        // renderTodolist();
+
+        // function renderTodolist() {
+        //     let todoListHTML = '';
+        //     for (let i = 0; i < todoList.length; i++) {
+        //         const todoObject = todoList[i];
+        //         const { name, dueDate, duetime } = todoObject;
+        //         const html = `
+        // <div class="todo-item">
+        //     <div class="todo-name">${name}</div>
+        //     <div class="todo-date">${dueDate}</div> 
+        //     <div class="todo-time">${duetime}</div> 
+        //     <button onclick="deleteTodo(${i}); 
+        //     renderTodolist();" 
+        //         class="delete-todo-button">delete</button>
+        // </div>
+        // `;
+        //         todoListHTML += html;
+        //     }
+        //     document.querySelector('.js-todo-list').innerHTML = todoListHTML;
+        // }
+
+        // function addtodo() {
+        //     const inputelement = document.querySelector('.js-name-input');
+        //     const name = inputelement.value;
+
+        //     const dateinputelement = document.querySelector('.js-due-date-input');
+        //     const dueDate = dateinputelement.value;
+
+        //     const timeinputelement = document.querySelector('.js-due-time-input');
+        //     const duetime = timeinputelement.value;
+
+        //     todoList.push({
+        //         name,
+        //         dueDate,
+        //         duetime
+        //     });
+        //     localStorage.setItem('todoList',JSON.stringify(todoList));
+        //     inputelement.value = '';
+        //     renderTodolist();
+        // }
+        // document.querySelector('.js-add-todo-button')
+        //     .addEventListener('click', addtodo);
+            
+    // Load todoList from localStorage (or empty if none saved yet)
+    let todoList = JSON.parse(localStorage.getItem('todoList')) || [];
+    renderTodolist();
+
+    function renderTodolist() {
+        let todoListHTML = '';
+        for (let i = 0; i < todoList.length; i++) {
+            const todoObject = todoList[i];
+            const { name, dueDate, duetime } = todoObject;
+            const html = `
+        <div class="todo-item">
+            <div class="todo-name">${name}</div>
+            <div class="todo-date">${dueDate}</div> 
+            <div class="todo-time">${duetime}</div> 
+            <button onclick="deleteTodo(${i})" 
+                class="delete-todo-button">delete</button>
+        </div>
+        `;
+            todoListHTML += html;
+        }
+        document.querySelector('.js-todo-list').innerHTML = todoListHTML;
+    }
+
+    function addtodo() {
+        const inputelement = document.querySelector('.js-name-input');
+        const name = inputelement.value;
+
+        const dateinputelement = document.querySelector('.js-due-date-input');
+        const dueDate = dateinputelement.value;
+
+        const timeinputelement = document.querySelector('.js-due-time-input');
+        const duetime = timeinputelement.value;
+
+        todoList.push({ name, dueDate, duetime });
+
+        // save to localStorage
+        localStorage.setItem('todoList', JSON.stringify(todoList));
+
+        inputelement.value = '';
+        renderTodolist();
+    }
+
+    // ✅ Added missing deleteTodo function
+    function deleteTodo(index) {
+        todoList.splice(index, 1);
+
+        // update localStorage after delete
+        localStorage.setItem('todoList', JSON.stringify(todoList));
+
+        renderTodolist();
+    }
+
+    document.querySelector('.js-add-todo-button')
+        .addEventListener('click', addtodo);
+
+
+    </script>
+</body>
+
+</html>
